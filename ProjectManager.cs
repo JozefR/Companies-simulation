@@ -9,16 +9,13 @@ namespace XA01
     ///     o kterem vite, ze bude obecny a nebudou z nej v programu vytvareny instance. Timto tedy musite upravit jak tuto tridu tak
     ///     tridu Programmer, pricemz ze spolecneho predka vyuzijte jeho konstruktor v potomcich.
     /// </summary>
-    public class ProjectManager
+    public class ProjectManager : Employee
     {
-        public string Name { get; set; }
-        public int DailyWage { get; set; }
         public List<Project> ManagedProjects { get; set; }
 
         public ProjectManager(string name, int dailyWage, List<Project> managedProjects)
+            : base(name, dailyWage)
         {
-            Name = name;
-            DailyWage = dailyWage;
             ManagedProjects = managedProjects;
         }
     }

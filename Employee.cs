@@ -1,6 +1,6 @@
 ﻿namespace XA01
 {
-    class Employee
+    public class Employee
     {
         public string Name { get; set; }
         public int DailyWage { get; set; }
