@@ -76,7 +76,16 @@ namespace XA01
         /// </summary>
         public void CheckProjects()
         {
-
+            for (int i = 0; i < ProjectsCurrent.Count; i++)
+            {
+                if (ProjectsCurrent[i].ManDaysDone >= ProjectsCurrent[i].ManDays)
+                {
+                    ProjectsCurrent[i].State = ProjectState.Done;
+                    ProjectsDone.Add(ProjectsCurrent[i]);
+                    Budget += ProjectsCurrent[i].Price;
+                    ProjectsCurrent.Remove(ProjectsCurrent[i]);
+                }
+            }
         }
 
         /// <summary>
@@ -85,7 +94,16 @@ namespace XA01
         /// </summary>
         public void CheckProgrammers()
         {
-
+            foreach (var doneProjects in ProjectsDone)
+            {
+                foreach (var programmer in Programmers)
+                {
+                    if (doneProjects.Name == programmer.Project.Name)
+                    {
+                        programmer.ClearProject();
+                    }
+                }
+            }
         }
 
         /// <summary>
