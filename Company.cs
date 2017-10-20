@@ -131,7 +131,12 @@ namespace XA01
         /// </summary>
         public void ProgrammersWork()
         {
-
+            foreach (var programmer in Programmers)
+            {
+                programmer.WriteCode();
+                Budget -= programmer.DailyWage;
+                Budget -= DailyExpenses;
+            }
         }
 
         /// <summary>
