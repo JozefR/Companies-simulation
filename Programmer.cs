@@ -1,0 +1,54 @@
+﻿namespace XA01
+{
+    public class Programmer
+    {
+        public string Name { get; private set; }
+        public double Speed { get; private set; }
+        public int DailyWage { get; private set; }
+
+        public Project Project { get; private set; }
+
+        public string ProjectName
+        {
+            get
+            {
+                return Project?.Name ?? "No project assigned";
+            }
+        }
+
+        public Programmer(string name,double speed, int dailyWage)
+        {
+            Name = name;
+            Speed = speed;
+            DailyWage = dailyWage;
+        }
+        /// <summary>
+        /// Uvolni programatora z projektu.
+        /// </summary>
+        /// <remarks>Zamerne je implementovano jako metoda pro ilustraci situace, kdy je napr. dopredu pocitano s tim,
+        /// ze pri uvolnovani projektu bude implementovana urcita business logika, ktera svym charakterem neodpovida
+        /// situaci, kdy by se typicky dala vyuzit vlastnost - setter. Nicmene zadnou logiku nyni do teto metody nepridavejte.</remarks>
+        public void ClearProject()
+        {
+            Project = null;
+        }
+        
+        /// <summary>
+        /// Priradi programatorovi projekt, na kterem bude pracovat.
+        /// </summary>
+        /// <remarks>Duvod proc je toto implementovano jako metoda
+        /// a nikoliv pomoci setter jsou obdobne jako u <see cref="ClearProject"/></remarks>
+        public void AssignProject(Project project)
+        {
+            Project = project;
+        }
+
+        /// <summary>
+        /// Programator odvede svou praci na projektu.
+        /// </summary>
+        public void WriteCode()
+        {
+            Project.ReceiveWork(Speed);
+        }
+    }
+}
