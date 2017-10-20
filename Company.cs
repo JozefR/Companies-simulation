@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace XA01
 {
@@ -59,7 +60,13 @@ namespace XA01
         /// </summary>
         public void AllocateProgrammers(List<Programmer> programmers)
         {
-            
+            foreach (var programmer in programmers)
+            {
+                var programmerEffectivity = programmer.DailyWage / (programmer.Speed * 100);
+                programmer.Effectivity = programmerEffectivity;
+                Programmers.Add(programmer);
+            }
+            Programmers = Programmers.OrderBy(p => p.Effectivity).ToList();
         }
 
         /// <summary>

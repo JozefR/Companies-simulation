@@ -5,6 +5,7 @@
         public string Name { get; private set; }
         public double Speed { get; private set; }
         public int DailyWage { get; private set; }
+        public double Effectivity { get; set; }
 
         public Project Project { get; private set; }
 
