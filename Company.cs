@@ -164,7 +164,14 @@ namespace XA01
         /// </summary>
         public void CheckCompanyState()
         {
-            
+            if (Budget < 0)
+            {
+                State = CompanyState.Bankrupt;
+            }
+            else if (ProjectsWaiting.Count == 0 && ProjectsCurrent.Count == 0)
+            {
+                State = CompanyState.Finished;
+            }
         }
 
         /// <summary>
