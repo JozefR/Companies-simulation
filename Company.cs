@@ -99,7 +99,29 @@ namespace XA01
         /// </summary>
         public void AssignNewProjects()
         {
+            for (int i = 0; i < Programmers.Count; i++)
+            {
+                if (Programmers[i].Project == null)
+                {
+                    if (ProjectsWaiting.Count != 0)
+                    {
+                        var getFirstProject = ProjectsWaiting.First();
+                        getFirstProject.State = ProjectState.Current;
 
+                        Programmers[i].AssignProject(getFirstProject);
+                        ProjectsCurrent.Add(getFirstProject);
+
+                        ProjectsWaiting.Remove(getFirstProject);
+                    }
+                    else if (ProjectsCurrent.Count != 0)
+                    {
+                        var sortProjectsByMostToDo = ProjectsCurrent.OrderBy(p => p.ManDays);
+                        var getFirstProjectMostToDo = sortProjectsByMostToDo.First();
+
+                        Programmers[i].AssignProject(getFirstProjectMostToDo);
+                    }
+                }
+            }
         }
 
         /// <summary>
