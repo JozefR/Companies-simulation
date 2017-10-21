@@ -133,7 +133,7 @@ namespace XA01
                     }
                     else if (ProjectsCurrent.Count != 0)
                     {
-                        var sortProjectsByMostToDo = ProjectsCurrent.OrderBy(p => p.ManDays);
+                        var sortProjectsByMostToDo = ProjectsCurrent.OrderBy(p => p.ManDays).Reverse();
                         var getFirstProjectMostToDo = sortProjectsByMostToDo.First();
 
                         Programmers[i].AssignProject(getFirstProjectMostToDo);
