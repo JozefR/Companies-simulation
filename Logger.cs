@@ -11,7 +11,15 @@ namespace XA01
     /// </summary>
     public class Logger
     {
+        private static readonly Logger _instance =
+            new Logger();
+
         
+        public static Logger GetLoggerInstance()
+        {
+            return _instance;
+        }
+
         public void Log(string message)
         {
             Console.WriteLine("Logger: {0}", message);

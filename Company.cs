@@ -35,8 +35,9 @@ namespace XA01
             Budget = budget;
             // IMPLEMENTUJTE ZDE: az budete mit implementovanu tridu Logger, pak zde ziskejte jeji instanci a ulozte
             // ji do promenne logger.
+            logger = Logger.GetLoggerInstance();
         }
-
+            
         /// <summary>
         /// Nacte vsechny projekty do kolekce ProjectsWaiting
         /// </summary>
@@ -181,7 +182,7 @@ namespace XA01
         public void Run()
         {
             // IMPLEMENTUJTE ZDE: az budete mit implementovanu tridu Logger, pak nasledujici radek odkomentujte
-            //logger.Log(string.Format("Company: {0}, started with budget: {1}", Name, Budget));
+            logger.Log(string.Format("Company: {0}, started with budget: {1}", Name, Budget));
             State = CompanyState.Running;
             while(State != CompanyState.Bankrupt && State != CompanyState.Finished && Days <= 1000)
             {
