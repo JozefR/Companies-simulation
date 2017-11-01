@@ -122,7 +122,7 @@ namespace XA01
             {
                 if (Programmers[i].Project == null)
                 {
-                    if (ProjectsWaiting.Count != 0)
+                    if (ProjectsWaiting.Count > 0)
                     {
                         var getFirstProject = ProjectsWaiting.First();
                         getFirstProject.State = ProjectState.Current;
@@ -134,7 +134,7 @@ namespace XA01
                     }
                     else if (ProjectsCurrent.Count != 0)
                     {
-                        var sortProjectsByMostToDo = ProjectsCurrent.OrderBy(p => p.ManDays).Reverse();
+                        var sortProjectsByMostToDo = ProjectsCurrent.OrderBy(p => p.ManDays - p.ManDaysDone).Reverse();
                         var getFirstProjectMostToDo = sortProjectsByMostToDo.First();
 
                         Programmers[i].AssignProject(getFirstProjectMostToDo);
@@ -154,8 +154,8 @@ namespace XA01
             {
                 programmer.WriteCode();
                 Budget -= programmer.DailyWage;
-                Budget -= DailyExpenses;
             }
+            Budget -= DailyExpenses;
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace XA01
             {
                 State = CompanyState.Bankrupt;
             }
-            else if (ProjectsWaiting.Count == 0 && ProjectsCurrent.Count == 0)
+            else if (ProjectsWaiting.Count <= 0 && ProjectsCurrent.Count <= 0)
             {
                 State = CompanyState.Finished;
             }
