@@ -21,6 +21,7 @@ namespace XA01
         public int Days { get; private set; } = 0;
         public CompanyState State { get; set; } = CompanyState.Idle;
         public List<Programmer> Programmers { get; private set; } = new List<Programmer>();
+        public List<Programmer> SortedProgrammersByEffectivity { get; private set; } = new List<Programmer>();
         public List<Project> ProjectsWaiting { get; private set; } = new List<Project>();
         public List<Project> ProjectsCurrent { get; private set; } = new List<Project>();
         public List<Project> ProjectsDone { get; private set; } = new List<Project>();
@@ -65,9 +66,14 @@ namespace XA01
             {
                 var programmerEffectivity = programmer.DailyWage / (programmer.Speed * 100);
                 programmer.Effectivity = programmerEffectivity;
-                Programmers.Add(programmer);
+                SortedProgrammersByEffectivity.Add(programmer);
             }
-            Programmers = Programmers.OrderBy(p => p.Effectivity).ToList();
+            SortedProgrammersByEffectivity = SortedProgrammersByEffectivity.OrderBy(p => p.Effectivity).ToList();
+
+            for (int i = 0; i < Capacity; i++)
+            {
+                Programmers.Add(SortedProgrammersByEffectivity[i]);
+            }
         }
 
         /// <summary>
