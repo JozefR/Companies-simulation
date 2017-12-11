@@ -13,6 +13,7 @@ Buď by se měla efektivita dopočíst na místě
 která bude mít pouze getter,
 který se dopočte hodnotu z poměru ceny a výkonu. Nicméně toto nepovažuji přímo
 za chybu.
+
 V metodě CheckProgrammers by bylo vhodnější se na stav projektu programátora
 dotazovat přes vlastnosti programmer.
 Project.State.
