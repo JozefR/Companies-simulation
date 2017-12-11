@@ -129,17 +129,11 @@ namespace XA01
         /// </summary>
         public void CheckProgrammers()
         {
-            foreach (var doneProjects in ProjectsDone)
+            foreach (var programmer in Programmers)
             {
-                foreach (var programmer in Programmers)
+                if (programmer.Project.State == ProjectState.Done)
                 {
-                    if (programmer.Project != null)
-                    {
-                        if (doneProjects.Name == programmer.Project.Name)
-                        {
-                            programmer.ClearProject();
-                        }
-                    }
+                    programmer.ClearProject();
                 }
             }
         }
