@@ -3,7 +3,13 @@
     public class Programmer : Employee
     {
         public double Speed { get; private set; }
-        public double Effectivity { get; set; }
+        public double Effectivity
+        {
+            get
+            {
+                return calculateEffectivity();
+            }
+        }
 
         public Project Project { get; private set; }
 
@@ -48,6 +54,15 @@
         public void WriteCode()
         {
             Project.ReceiveWork(Speed);
+        }
+
+        /// <summary>
+        /// Spocita effectivitu programatora
+        /// </summary>
+        /// <returns></returns>
+        private double calculateEffectivity()
+        {
+            return this.DailyWage / (this.Speed * 100);
         }
     }
 }

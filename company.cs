@@ -28,7 +28,7 @@ namespace XA01
 
         private Logger logger;
 
-        public Company(string name, int capacity,int dailyExpenses, int budget)
+        public Company(string name, int capacity, int dailyExpenses, int budget)
         {
             Name = name;
             Capacity = capacity;
@@ -38,13 +38,13 @@ namespace XA01
             // ji do promenne logger.
             logger = Logger.GetLoggerInstance();
         }
-            
+
         /// <summary>
         /// Nacte vsechny projekty do kolekce ProjectsWaiting
         /// </summary>
         public void AllocateProjects(List<Project> projects)
         {
-            foreach(Project proj in projects)
+            foreach (Project proj in projects)
             {
                 ProjectsWaiting.Add(proj);
             }
@@ -64,8 +64,6 @@ namespace XA01
         {
             foreach (var programmer in programmers)
             {
-                var programmerEffectivity = programmer.DailyWage / (programmer.Speed * 100);
-                programmer.Effectivity = programmerEffectivity;
                 SortedProgrammersByEffectivity.Add(programmer);
             }
             SortedProgrammersByEffectivity = SortedProgrammersByEffectivity.OrderBy(p => p.Effectivity).ToList();
