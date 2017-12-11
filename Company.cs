@@ -81,6 +81,8 @@ namespace XA01
         ///     Z ProjectsCurrent odeberte ty projekty, ktere jsou dokoncene. Dokonceny projekt je ten, ktery ma ManDaysDone >= ManDays.
         ///     Zaroven temto projektum nastavte spravny stav, pridejte je do ProjectsDone a do rozpoctu firmy prictete utrzene penize za projekt.
         /// </summary>
+        
+        /*
         public void CheckProjects()
         {
             for (int i = 0; i < ProjectsCurrent.Count; i++)
@@ -94,6 +96,34 @@ namespace XA01
                 }
             }
         }
+        */
+        
+        public void CheckProjects()
+        {
+            var projectsToHandle = new List<Project>();
+
+            for (int i = 0; i < ProjectsCurrent.Count; i++)
+            {
+                if (ProjectsCurrent[i].ManDaysDone >= ProjectsCurrent[i].ManDays)
+                {
+                    projectsToHandle.Add(ProjectsCurrent[i]);
+                }
+            }
+            if (projectsToHandle.Count != 0)
+            handleProjectsDone(projectsToHandle);
+        }
+
+        private void handleProjectsDone(List<Project> ProjectsToHandle)
+        {
+            foreach (var project in ProjectsToHandle)
+            {
+                project.State = ProjectState.Done;
+                ProjectsDone.Add(project);
+                Budget += project.Price;
+                ProjectsCurrent.Remove(project);
+            }
+            ProjectsToHandle.Clear();
+        }
 
         /// <summary>
         /// IMPLEMENTUJTE TUTO METODU
@@ -105,9 +135,12 @@ namespace XA01
             {
                 foreach (var programmer in Programmers)
                 {
-                    if (doneProjects.Name == programmer.Project.Name)
+                    if (programmer.Project != null)
                     {
-                        programmer.ClearProject();
+                        if (doneProjects.Name == programmer.Project.Name)
+                        {
+                            programmer.ClearProject();
+                        }
                     }
                 }
             }
